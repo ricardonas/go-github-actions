@@ -1,0 +1,18 @@
+name: ci-golang-workflow
+# Run action on every repository received push.
+on: [push]
+jobs:
+  check-application:
+    # OS where application should run.
+    runs-on: ubuntu-latest
+    steps:
+      # Action to perform a checkout the repository under GitHub workspace.
+      - uses: actions/checkout@v4
+      # Sets up a go environment for use in actions.
+      - uses: actions/setup-go@v5
+      with:
+        # Go version to be used in go configured environment.
+        go-version: 1.21.3
+      # Commands to run.
+      - run: go test
+      - run: go run math.go
